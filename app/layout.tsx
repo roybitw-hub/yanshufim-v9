@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Heebo } from 'next/font/google';
 import './globals.css';
-
-const heebo = Heebo({ subsets: ['hebrew', 'latin'], weight: ['400', '500', '600', '700', '800', '900'], variable: '--font-heebo', display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'ינשופים',
@@ -22,8 +19,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="he" dir="rtl" className={heebo.variable} suppressHydrationWarning>
+    <html lang="he" dir="rtl" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap" />
         {/* The owl's fly-in plays once per visit; later page loads start from the hover loop. */}
         <script dangerouslySetInnerHTML={{ __html: "try{var k='ys-owl';if(sessionStorage.getItem(k))document.documentElement.dataset.owlSeen='1';else sessionStorage.setItem(k,'1')}catch(e){}" }} />
       </head>
