@@ -50,9 +50,9 @@ export default async function Home() {
 
       <div className="content">
         <div className="home-grid">
-          <div>
-            <Ticker messages={h.messages} />
-            <Yoman today={today} now={now} events={h.events} />
+          <div className="area-ticker"><Ticker messages={h.messages} /></div>
+          <div className="area-yoman"><Yoman today={today} now={now} events={h.events} /></div>
+          <div className="area-bento">
             <div className="bento">
               <a href="/tasks" className="card">
                 <Tile icon="task" color="#14A36A" size={38} />
@@ -65,11 +65,13 @@ export default async function Home() {
                   <span className="t12 muted"><b style={{ fontSize: 22, color: 'var(--ink)', fontWeight: 900 }}>{h.stats.urgentToday}</b> היום · {h.stats.urgentWeek} השבוע</span></div>
               </a>
             </div>
+          </div>
+          <div className="area-feed">
             <div id="feed" style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               <FeedBoard pinned={h.view.pinned} feed={h.view.feed} courses={h.courseLite} />
             </div>
           </div>
-          <div>
+          <div className="area-later">
             {h.later.length > 0 && (
               <section className="card" aria-label="בהמשך">
                 <div className="card-head"><h2>בהמשך</h2></div>
@@ -85,6 +87,8 @@ export default async function Home() {
                 ))}
               </section>
             )}
+          </div>
+          <div className="area-courses">
             <section aria-label="הקורסים שלי" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div className="card-head">
                 <h2 style={{ fontSize: 20, fontWeight: 800 }}>הקורסים שלי</h2>

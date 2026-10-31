@@ -13,6 +13,7 @@ export function FeedBoard({ pinned, feed, courses }: { pinned: Signal[]; feed: S
   const [pinState, setPin] = useState<Record<string, boolean>>(() => Object.fromEntries(pinned.map((s) => [s.key, true])));
   const [readState, setRead] = useState<Record<string, boolean>>({});
   const [filter, setFilter] = useState<Cat>('all');
+  const [showAll, setShowAll] = useState(false);
   const [drag, setDrag] = useState<{ key: string; x0: number; dx: number } | null>(null);
   const moved = useRef(false);
   const [, start] = useTransition();
@@ -121,8 +122,11 @@ export function FeedBoard({ pinned, feed, courses }: { pinned: Signal[]; feed: S
             <button key={k} aria-pressed={filter === k} onClick={() => setFilter(k)}>{l}</button>
           ))}
         </div>
-        {feedNow.length ? feedNow.map(card) : (
+        {feedNow.length ? (showAll ? feedNow : feedNow.slice(0, 5)).map(card) : (
           <div className="card" style={{ alignItems: 'center', textAlign: 'center' }}><span className="t14" style={{ color: 'var(--muted2)' }}>אין כאן משהו דחוף. כל הכבוד.</span></div>
+        )}
+        {!showAll && feedNow.length > 5 && (
+          <button className="btn ghost" style={{ alignSelf: 'center', minHeight: 40 }} onClick={() => setShowAll(true)}>עוד {feedNow.length - 5} פריטים</button>
         )}
         <span className="t12 muted swipe-hint" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="swipe" size={14} />החלקה ימינה נועצת, שמאלה מסמנת כבוצע</span>
         {readNow.length > 0 && (

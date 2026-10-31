@@ -147,19 +147,26 @@ bdi { unicode-bidi: isolate; }
 .bar { height: 7px; border-radius: 4px; background: rgba(120,105,210,0.18); overflow: hidden; }
 .bar > span { display: block; height: 100%; border-radius: 4px; }
 
+.home-grid, .home-grid > div { display: flex; flex-direction: column; gap: 18px; }
+.home-grid > div:empty { display: none; }
 @media (min-width: 1024px) {
-  .home-grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; align-items: start; }
-  .home-grid > div { display: flex; flex-direction: column; gap: 20px; }
+  .home-grid { display: grid; gap: 20px; align-items: start;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    grid-template-areas: "yoman ticker" "yoman bento" "feed later" "courses courses"; }
+  .area-ticker { grid-area: ticker; } .area-yoman { grid-area: yoman; } .area-bento { grid-area: bento; }
+  .area-feed { grid-area: feed; } .area-later { grid-area: later; position: sticky; top: 20px; } .area-courses { grid-area: courses; }
+  .area-yoman > .card { min-height: 100%; }
   .pin-strip { margin: 0; padding: 2px 0 6px; }
   .course-strip { margin: 0; padding: 2px 0 8px; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
 }
 
 /* ---------- timeline ---------- */
-.tl { position: relative; height: 86px; margin: 4px 8px 0; }
+.tl { position: relative; height: 92px; margin: 4px 8px 0; overflow: hidden; }
 .tl-base { position: absolute; top: 9px; height: 4px; border-radius: 2px; background: rgba(120,105,210,0.18); }
 .tl-prog { position: absolute; top: 9px; height: 4px; border-radius: 2px; background: linear-gradient(270deg, #5EEAD4, #6B4DFF); }
 .tl-node { position: absolute; top: 0; width: 76px; margin-right: -38px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
-.tl-now { position: absolute; top: -2px; display: flex; flex-direction: column; align-items: center; gap: 3px; margin-right: -1px; }
+.tl-node > * { max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tl-now { position: absolute; top: 0; display: flex; flex-direction: column; align-items: center; gap: 3px; margin-right: -1px; }
 .tl-now span:first-child { width: 3px; height: 24px; border-radius: 2px; background: #E23A5E; }
 .month-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; text-align: center; }
 .month-cell { height: 44px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 13px; font-weight: 700; }
