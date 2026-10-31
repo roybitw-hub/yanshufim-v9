@@ -19,7 +19,7 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: var(--font-heebo), 'Heebo', system-ui, sans-serif;
+  font-family: 'Heebo', 'Assistant', 'Segoe UI', system-ui, -apple-system, sans-serif;
   color: var(--ink);
   background: var(--page);
   min-height: 100dvh;
