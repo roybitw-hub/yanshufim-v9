@@ -14,13 +14,13 @@ let chain: Promise<unknown> = Promise.resolve();
 let last = 0;
 
 function token(): string {
-  const t = process.env.NOTION_TOKEN;
+  const t = process.env.NOTION_TOKEN || process.env.NOTION_API_KEY;
   if (!t) throw new Error('NOTION_TOKEN is not set');
   return t;
 }
 
 export function hasNotion(): boolean {
-  return !!process.env.NOTION_TOKEN;
+  return !!(process.env.NOTION_TOKEN || process.env.NOTION_API_KEY);
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
