@@ -101,6 +101,7 @@ export async function createItem(input: {
   if (!hasNotion()) return null;
   const page = await createPage(DS.items, {
     'שם': write.title(input.title),
+    'מזהה': write.text(`app:${crypto.randomUUID()}`),
     'סוג': write.select(input.type),
     'סטטוס': write.select('פתוח'),
     'קורס': write.relation([input.courseId]),
